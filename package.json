@@ -1,0 +1,21 @@
+{
+  "name": "csv-upload",
+  "version": "1.0.0",
+  "description": "upload csv files and display the data in the formatted way.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "dharmesh",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "csv": "^6.3.8",
+    "ejs": "^3.1.10",
+    "express": "^4.19.2",
+    "express-ejs-layouts": "^2.5.1",
+    "fs": "^0.0.1-security",
+    "mongoose": "^8.3.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}

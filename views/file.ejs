@@ -1,0 +1,36 @@
+<div class="container">
+	<canvas id="myChart"></canvas>
+	<input type="text" id="searchInput" placeholder="Search..." />
+	
+</div>
+
+<table>
+	<thead>
+		<tr>
+			<% header.forEach(header => { %>
+			<th><%= header %></th>
+			<% }); %>
+		</tr>
+	</thead>
+	<tbody>
+		<% body.forEach(row => { %>
+		<tr onclick="createChart('<%= JSON.stringify(row) %>')">
+			<% Object.values(row).forEach(value => { %>
+			<td><%= value %></td>
+			<% }); %>
+		</tr>
+		<% }); %>
+	</tbody>
+</table>
+
+<div class="pagination">
+	<% if (page > 1) { %>
+	<a href="/file/<%= fileName %>?page=<%= page - 1 %>" class="prev"
+		>&laquo; Previous</a
+	>
+	<% } if (page < pageSize) { %>
+	<a href="/file/<%= fileName %>?page=<%= page + 1 %>" class="next"
+		>Next &raquo;</a
+	>
+	<% } %>
+</div>
