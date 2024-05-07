@@ -9,7 +9,10 @@
   "author": "dharmesh",
   "license": "ISC",
   "type": "module",
-  "dependencies": {
+  "publishConfig": {
+    "@Dharmesh-Shimpi:registry": "https://npm.pkg.github.com"
+  },
+  "dependencies": {z
     "csv": "^6.3.8",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
