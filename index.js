@@ -1,12 +1,15 @@
-import express from "express";
-import expressLayouts from "express-ejs-layouts";
-import { urlencoded } from "express";
-const app = express();
-app.set("view engine", "ejs");
-app.use(expressLayouts);
-app.set("views", "views");
-app.use(express.static("views"));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+import server from './routes/routes.js';
+import mongoose from 'mongoose';
 
-export default app;
+async function connectDatabase() {
+	try {
+		await mongoose.connect('mongodb://localhost:27017');
+	} catch (error) {
+		console.log(error);
+	}
+}
+
+server.listen(5000, () => {
+	connectDatabase();
+	console.log('server is listening at port 5000');
+});
