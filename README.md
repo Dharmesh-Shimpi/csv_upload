@@ -1,3 +1,3 @@
 Hi Everyone,
 
-This is a basic app to upload and load a .csv files.
+This is a basic app to upload and load .csv files.
