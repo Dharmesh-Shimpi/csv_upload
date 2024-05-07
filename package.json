@@ -4,15 +4,13 @@
   "description": "upload csv files and display the data in the formatted way.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "author": "dharmesh",
   "license": "ISC",
   "type": "module",
-  "publishConfig": {
-    "@Dharmesh-Shimpi:registry": "https://npm.pkg.github.com"
-  },
-  "dependencies": {z
+  "dependencies": {
     "csv": "^6.3.8",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
