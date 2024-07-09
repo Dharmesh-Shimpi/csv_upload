@@ -1,15 +1,21 @@
 import express from 'express';
-const router = express.Router();
+import path from 'path';
 import { getFile } from '../middleware/fileUpload.js';
 
-router.get('/:fileName', (req, res) => {
-	const fileName = req.params.fileName;
-	console.log(fileName);
-	const page = parseInt(req.query.page) || 1;
-	const pageSize = 100; // page size to 100 records
-	const filePath = `uploads/${fileName}`;
+const router = express.Router();
 
-	getFile(fileName, filePath, page, pageSize, res);
+router.get('/:fileName', async (req, res) => {
+	const fileName = req.params.fileName;
+	const page = parseInt(req.query.page) || 1;
+	const pageSize = 100; // Page size to 100 records
+	const filePath = path.join('uploads', fileName);
+
+	try {
+		const { header, body } = await getFile(filePath, page, pageSize);
+		res.render('file', { fileName, header, body, page, pageSize });
+	} catch (err) {
+		res.status(500).send('Error processing file');
+	}
 });
 
 export default router;

@@ -1,6 +1,6 @@
 import multer from 'multer';
-import fs from 'fs';
-import { csvToJson } from './csvToJson.js';
+import fs from 'fs/promises'; // Use the promises API
+import { csvToJson } from './csvToJson.js'; // Ensure this function is correctly implemented
 
 const storage = multer.diskStorage({
 	destination: (req, file, cb) => {
@@ -11,8 +11,6 @@ const storage = multer.diskStorage({
 	},
 });
 
-
-// below are all the controllers for the file upload
 const fileFilter = (req, file, cb) => {
 	if (file.mimetype === 'text/csv') {
 		cb(null, true);
@@ -23,9 +21,9 @@ const fileFilter = (req, file, cb) => {
 
 export const upload = multer({ storage, fileFilter });
 
-export const files = () => {
+export const files = async () => {
 	try {
-		const files = fs.readdirSync('uploads/');
+		const files = await fs.readdir('uploads/');
 		return files;
 	} catch (error) {
 		console.error('Error reading uploaded files:', error);
@@ -33,29 +31,16 @@ export const files = () => {
 	}
 };
 
-export function getFile(fileName, filePath, page, pageSize, res) {
-	fs.readFile(filePath, 'utf8', (err, data) => {
-		if (err) {
-			console.error('Error reading file:', err);
-			return res.status(500).send('Error reading file');
-		}
-		csvToJson(data, page, pageSize, (err, jsonData) => {
-			if (err) {
-				console.error('Error converting CSV to JSON:', err);
-				return res.status(500).send('Error converting CSV to JSON');
-			}
+export async function getFile(filePath, page, pageSize) {
+	try {
+		const data = await fs.readFile(filePath, 'utf8');
+		const body = await csvToJson(data, page, pageSize);
 
-			const headerRegex = /^([^\s,]+)(?:,\s*([^\s,]+))*/gm;
-			const matches = data.match(headerRegex);
-			let header;
-			if (matches) {
-				header = matches[0].split(',');
-			} else {
-				throw new Error('Headers not found in CSV');
-			}
+		const header = Object.keys(body[0]);
 
-			const body = jsonData.slice(1);
-			res.render('file', { fileName, header, body, page, pageSize });
-		});
-	});
+		return { header, body };
+	} catch (err) {
+		console.error('Error processing file:', err);
+		throw new Error('Error processing file');
+	}
 }

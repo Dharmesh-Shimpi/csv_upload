@@ -1,15 +1,9 @@
-import * as csv from 'csv';
+import csv from 'csvtojson';
 
-export function csvToJson(data, page, pageSize, callback) {
+export async function csvToJson(data, page, pageSize) {
+	const jsonData = await csv().fromString(data);
 	const startIndex = (page - 1) * pageSize;
 	const endIndex = startIndex + pageSize;
-	csv.parse(data, { delimiter: ',', length: endIndex }, (err, output) => {
-		if (err) {
-			console.log(err);
-			callback(err, null);
-		} else {
-			const paginatedOutput = output.slice(startIndex, endIndex);
-			callback(null, paginatedOutput);
-		}
-	});
+	const paginatedOutput = jsonData.slice(startIndex, endIndex);
+	return paginatedOutput;
 }

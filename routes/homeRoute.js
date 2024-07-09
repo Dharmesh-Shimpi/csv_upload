@@ -3,8 +3,8 @@ import { upload, files } from '../middleware/fileUpload.js';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-	const fileList = files();
+router.get('/', async (req, res) => {
+	const fileList = await files();
 	res.render('home', { files: fileList });
 });
 
