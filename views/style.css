@@ -1,6 +1,18 @@
-#myChart {
-	width: 100px;
-	height: 500px;
-	margin: 0 auto;
-	border: 1px solid black;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    background: linear-gradient(240deg, rgb(104, 93, 93), rgb(42, 42, 42));
+    display: flex;
+    flex-direction: row;
+}
+
+h1 {
+    margin: 1rem;
 }

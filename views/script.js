@@ -1,35 +1,35 @@
-function createChart(data) {
-	const ctx = document.getElementById('myChart').getContext('2d');
-	const labels = data.map((item) => item.description);
-	const values = data.map((item) => item.value);
+// function createChart(data) {
+// 	const ctx = document.getElementById('myChart').getContext('2d');
+// 	const labels = data.map((item) => item.description);
+// 	const values = data.map((item) => item.value);
 
-	new Chart(ctx, {
-		type: 'bar',
-		data: {
-			labels: labels,
-			datasets: [
-				{
-					label: 'Value',
-					data: values,
-					backgroundColor: 'rgba(54, 162, 235, 0.2)',
-					borderColor: 'rgba(54, 162, 235, 1)',
-					borderWidth: 1,
-				},
-			],
-		},
-		options: {
-			scales: {
-				yAxes: [
-					{
-						ticks: {
-							beginAtZero: true,
-						},
-					},
-				],
-			},
-		},
-	});
-}
+// 	new Chart(ctx, {
+// 		type: 'bar',
+// 		data: {
+// 			labels: labels,
+// 			datasets: [
+// 				{
+// 					label: 'Value',
+// 					data: values,
+// 					backgroundColor: 'rgba(54, 162, 235, 0.2)',
+// 					borderColor: 'rgba(54, 162, 235, 1)',
+// 					borderWidth: 1,
+// 				},
+// 			],
+// 		},
+// 		options: {
+// 			scales: {
+// 				yAxes: [
+// 					{
+// 						ticks: {
+// 							beginAtZero: true,
+// 						},
+// 					},
+// 				],
+// 			},
+// 		},
+// 	});
+// }
 
 document.addEventListener('DOMContentLoaded', () => {
 	const searchInput = document.getElementById('searchInput');
